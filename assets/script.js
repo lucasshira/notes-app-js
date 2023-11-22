@@ -17,8 +17,9 @@ function addNewNote(text = '') {
 
     note.innerHTML = `
     <div class="notes">
-        <div class="tools">
-            <button class="edit-btn"><i class="fa-solid fa-edit"></i></button>
+    <div class="tools">
+    <input class="title" placeholder="Adicione um titulo a nota"></>
+    <button class="edit-btn"><i class="fa-solid fa-edit"></i></button>
             <button class="delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
         </div>
 
@@ -34,8 +35,16 @@ function addNewNote(text = '') {
     textArea.value = text;
 
     editBtn.addEventListener('click', () => {
-        main.classList.toggle('hidden');
-        textArea.classList.toggle('hidden');
+        const selectionStart = textArea.selectionStart;
+        const selectionEnd = textArea.selectionEnd;
+        const selectedText = textArea.value.substring(selectionStart, selectionEnd);
+        const textBefore = textArea.value.substring(0, selectionStart);
+        const textAfter = textArea.value.substring(selectionEnd);
+
+        const boldText = `**${selectedText}**`;
+
+        textArea.value = `${textBefore}${boldText}${textAfter}`;
+        textArea.focus();
     });
 
     deleteBtn.addEventListener('click', () => {
