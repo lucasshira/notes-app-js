@@ -72,4 +72,5 @@ body {
     border-radius: 5px;
     display: flex;
     flex: 0.9;
+    font-weight: bold;
 }

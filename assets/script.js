@@ -19,33 +19,29 @@ function addNewNote(text = '') {
     <div class="notes">
     <div class="tools">
     <input class="title" placeholder="Adicione um titulo a nota"></>
-    <button class="edit-btn"><i class="fa-solid fa-edit"></i></button>
-            <button class="delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+
+        <div class="date"></div>
+
+        <button class="delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+
         </div>
 
-            <textarea></textarea>
+        <textarea></textarea>
     </div>`;
 
-    const editBtn = note.querySelector('.edit-btn');
+    const date = note.querySelector('.date');
     const deleteBtn = note.querySelector('.delete-btn');
-
     const main = note.querySelector('.main');
     const textArea = note.querySelector('textarea');
 
     textArea.value = text;
 
-    editBtn.addEventListener('click', () => {
-        const selectionStart = textArea.selectionStart;
-        const selectionEnd = textArea.selectionEnd;
-        const selectedText = textArea.value.substring(selectionStart, selectionEnd);
-        const textBefore = textArea.value.substring(0, selectionStart);
-        const textAfter = textArea.value.substring(selectionEnd);
+    const currentDate = new Date();
+    const diaAtual = currentDate.getDate();
+    const mesAtual = currentDate.getMonth() + 1;
+    const anoAtual = currentDate.getFullYear();
 
-        const boldText = `**${selectedText}**`;
-
-        textArea.value = `${textBefore}${boldText}${textAfter}`;
-        textArea.focus();
-    });
+    date.textContent = `${diaAtual}/${mesAtual}/${anoAtual}`;
 
     deleteBtn.addEventListener('click', () => {
         note.remove();
