@@ -1,40 +1,39 @@
 const addBtn = document.getElementById('add');
-const notes = JSON.parse(localStorage.getItem('notes'));
+const notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-if (notes) {
+if (notes.length > 0) {
     notes.forEach(note => {
-        addNewNote(note);
+        addNewNote(note.title, note.content);
     });
+} else {
+    addNewNote();
 }
 
 addBtn.addEventListener('click', () => {
     addNewNote(); 
 });
 
-function addNewNote(text = '') {
+function addNewNote(title = '', text = '') {
     const note = document.createElement('div');
     note.classList.add('note');
 
     note.innerHTML = `
     <div class="notes">
-    <div class="tools">
-    <input class="title" placeholder="Adicione um titulo a nota"></>
+        <div class="tools">
+            <input class="title" placeholder="Adicione um título à nota" value="${title}">
 
-        <div class="date"></div>
+            <div class="date"></div>
 
-        <button class="delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
-
+            <button class="delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
         </div>
 
-        <textarea></textarea>
+        <textarea>${text}</textarea>
     </div>`;
 
     const date = note.querySelector('.date');
     const deleteBtn = note.querySelector('.delete-btn');
-    const main = note.querySelector('.main');
     const textArea = note.querySelector('textarea');
-
-    textArea.value = text;
+    const titleInput = note.querySelector('.title');
 
     const currentDate = new Date();
     const diaAtual = currentDate.getDate();
@@ -48,7 +47,11 @@ function addNewNote(text = '') {
         updateLS();
     });
 
-    textArea.addEventListener('input', (e) => {
+    textArea.addEventListener('input', () => {
+        updateLS();
+    });
+
+    titleInput.addEventListener('input', () => {
         updateLS();
     });
 
@@ -56,12 +59,18 @@ function addNewNote(text = '') {
 }
 
 function updateLS() {
-    const notesText = document.querySelectorAll('textarea');
+    const notesDivs = document.querySelectorAll('.note');
 
     const notes = [];
 
-    notesText.forEach(note => {
-        notes.push(note.value)
+    notesDivs.forEach(noteDiv => {
+        const title = noteDiv.querySelector('.title').value;
+        const content = noteDiv.querySelector('textarea').value;
+
+        notes.push({
+            title,
+            content
+        });
     });
 
     localStorage.setItem('notes', JSON.stringify(notes));
