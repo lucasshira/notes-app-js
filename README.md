@@ -22,3 +22,7 @@ The app uses Local Storage to persist notes even after the browser is closed. No
 ## Live Demo
 
 You can view a live demo of this project on [GitHub Pages](https://lucasshira.github.io/notes-app-js).
+
+## Contributing
+
+Contributions are welcome! Feel free to submit pull requests, suggest improvements, or report any issues.
