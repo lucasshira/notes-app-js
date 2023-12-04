@@ -20,7 +20,7 @@ function addNewNote(title = '', text = '') {
     note.innerHTML = `
     <div class="notes">
         <div class="tools">
-            <input class="title" placeholder="Adicione um título à nota" value="${title}">
+            <input class="title" placeholder="Note title" value="${title}">
 
             <div class="date"></div>
 
@@ -32,15 +32,17 @@ function addNewNote(title = '', text = '') {
 
     const date = note.querySelector('.date');
     const deleteBtn = note.querySelector('.delete-btn');
+    deleteBtn.setAttribute('title', 'Delete note');
     const textArea = note.querySelector('textarea');
     const titleInput = note.querySelector('.title');
 
     const currentDate = new Date();
-    const diaAtual = currentDate.getDate();
+    let diaAtual = currentDate.getDate();
+    let valorDia = (diaAtual < 10) ? `0${diaAtual}` : diaAtual;
     const mesAtual = currentDate.getMonth() + 1;
     const anoAtual = currentDate.getFullYear();
 
-    date.textContent = `${diaAtual}/${mesAtual}/${anoAtual}`;
+    date.textContent = `${valorDia}/${mesAtual}/${anoAtual}`;
 
     deleteBtn.addEventListener('click', () => {
         note.remove();

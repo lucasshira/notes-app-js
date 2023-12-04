@@ -74,3 +74,11 @@ body {
     flex: 0.9;
     font-weight: bold;
 }
+
+.delete-btn {
+    transition: transform 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
+}
