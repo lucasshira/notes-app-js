@@ -40,9 +40,10 @@ function addNewNote(title = '', text = '') {
     let diaAtual = currentDate.getDate();
     let valorDia = (diaAtual < 10) ? `0${diaAtual}` : diaAtual;
     const mesAtual = currentDate.getMonth() + 1;
+    let valorMes = (mesAtual < 10) ? `0${mesAtual}` : mesAtual;
     const anoAtual = currentDate.getFullYear();
 
-    date.textContent = `${valorDia}/${mesAtual}/${anoAtual}`;
+    date.textContent = `${valorDia}/${valorMes}/${anoAtual}`;
 
     deleteBtn.addEventListener('click', () => {
         note.remove();
